@@ -239,7 +239,7 @@ class SimuladorIndustrial(ttk.Window):
             def_a = np.random.normal(10, 3, q)
             def_b = np.random.normal(12, 4, q)
 
-        # Cálculo de Tempo e Energia Individual (Para a Tabela)
+        # Cálculo de Tempo e Energia Individual pra tabela
         tempo_med_a = (ra['tempo'] * 3600) / q
         tempo_a_ind = np.random.normal(tempo_med_a, 2.0, q) 
         pot_a = DB_MAQUINAS[maq_user]['potencia'] * (0.5 if "CNC" in maq_user else 0.4)
@@ -331,7 +331,6 @@ class SimuladorIndustrial(ttk.Window):
         t.insert(tk.END, f"Res. {ma}:\t", "NORMAL"); t.insert(tk.END, f"R$ {la:.2f} [{'LUCRO' if la>0 else 'PREJUÍZO'}]\n", "GREEN" if la>0 else "RED")
         t.insert(tk.END, f"Res. {mb}:\t", "NORMAL"); t.insert(tk.END, f"R$ {lb:.2f} [{'LUCRO' if lb>0 else 'PREJUÍZO'}]\n", "GREEN" if lb>0 else "RED")
 
-        # --- AQUI ESTÁ A CORREÇÃO: Preço Sugerido Voltou! ---
         sug_a = (ra['c_tot']/q) * 1.45
         t.insert(tk.END, f"\n>>> Preço Sugerido ({ma}): R$ {sug_a:.2f} (Margem 45%)\n", "TIP")
 
@@ -356,7 +355,7 @@ class SimuladorIndustrial(ttk.Window):
         # 1. Define o nome da pasta
         pasta_nome = "Relatorios_SAMC"
         
-        # 2. Cria a pasta se ela não existir (no mesmo local do executável)
+        # 2. Cria a pasta se ela não existir 
         if not os.path.exists(pasta_nome):
             os.makedirs(pasta_nome)
 
@@ -382,4 +381,5 @@ class SimuladorIndustrial(ttk.Window):
             messagebox.showinfo("Sucesso", f"Relatório salvo em:\n{f}")
 if __name__ == "__main__":
     app = SimuladorIndustrial()
+
     app.mainloop()
